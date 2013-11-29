@@ -13,3 +13,5 @@ macro(add_gtest name)
 endmacro()
 
 add_gtest(first)
+add_gtest(sql sql_parser_core)
+

@@ -1,7 +1,7 @@
 # Copyright (C) 2013 Louis Hust. All Rights Reserved.
-CMAKE_MINIMUM_REQUIRED(VERSION 2.6)
 
-PROJECT(sql_parser)
+cmake_minimum_required(VERSION 2.6)
+project(sql_parser)
 
 # Project version number.
 set (SQL_PARSER_VERSION_MAJOR 1)
