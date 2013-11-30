@@ -7,6 +7,10 @@ project(sql_parser)
 set (SQL_PARSER_VERSION_MAJOR 1)
 set (SQL_PARSER_VERSION_MINOR 0)
 
+
+# Set compile flags
+set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -Wall -Werror -Wextra")
+
 # Set configure file
 configure_file (
   "include/config.h.in"

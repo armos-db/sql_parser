@@ -28,7 +28,7 @@ set_source_files_properties(${GEN_SOURCES} GENERATED)
 
 # create libraries
 add_library(sql_parser_core SHARED
-  ${CMAKE_CURRENT_BINARY_DIR}/scan.lex.c ${CMAKE_CURRENT_BINARY_DIR}/gram.tab.c )
+  ${CMAKE_CURRENT_BINARY_DIR}/scan.lex.c ${CMAKE_CURRENT_BINARY_DIR}/gram.tab.c mm.c)
 add_dependencies(sql_parser_core Parser)
 target_link_libraries(sql_parser_core fl)
 

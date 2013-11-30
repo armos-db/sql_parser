@@ -14,4 +14,5 @@ endmacro()
 
 add_gtest(first)
 add_gtest(sql sql_parser_core)
+add_gtest(mm sql_parser_core)
 

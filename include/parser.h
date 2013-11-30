@@ -5,11 +5,13 @@
 #define SQL_PARSER_PARSER_H
 
 #include "sql_stmt.h"
+#include "mm.h"
 
 /* personal data */
 struct pc_data
 {
   yyscan_t    scaninfo;
+  memory_manager *mm;
   statement   *stmt;
 };
 

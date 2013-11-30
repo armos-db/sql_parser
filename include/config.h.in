@@ -1,6 +1,26 @@
+/*
+ * Copyright (C) 2013 Louis Hust. All Rights Reserved.
+ */
 #ifndef SQL_PARSER_CONFIG_H
 #define SQL_PARSER_CONFIG_H
 #define SQL_PARSER_VERSION_MAJOR @SQL_PARSER_VERSION_MAJOR@
 #define SQL_PARSER_VERSION_MINOR @SQL_PARSER_VERSION_MINOR@
 #define PROJECT_NAME "SQL_Parser"
+
+
+#define MM_MIN_BLK_SIZE 256
+#define MM_DEF_BLK_SIZE 256
+
+/* Define as the maximum alignment requirement of any C data type. */
+#define MAXIMUM_ALIGNOF 8
+
+#define TYPEALIGN(ALIGNVAL,LEN)  \
+(((size_t) (LEN) + ((ALIGNVAL) - 1)) & ~((size_t) ((ALIGNVAL) - 1)))
+
+#define MAXALIGN(LEN)      TYPEALIGN(MAXIMUM_ALIGNOF, (LEN))
+
+#define MIN(A,B) (A > B ? B : A);
+#define MAX(A,B) (A > B ? A : B);
+
+
 #endif

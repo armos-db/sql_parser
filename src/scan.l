@@ -6,14 +6,10 @@
 #include "gram.tab.h"
 #include "parser.h"
 
-/*
- *  Set the type of YYSTYPE
- */
-/* #define YYSTYPE core_YYSTYPE */
 
+#define MM pp->mm
 void yyerror(const char*);
 
-static int process_integer_literal(const char *token, YYSTYPE *lval);
 
 %}
 
@@ -56,6 +52,10 @@ identifier      {ident_start}{ident_cont}*
 
 %%
 
+%{
+  struct pc_data *pp = yyextra;
+%}
+
 {whitespace}    { /* ignore */ }
 
  /* C-styple comment */
@@ -64,8 +64,8 @@ identifier      {ident_start}{ident_cont}*
 <xc>{xcinside}  { /* ignore */ }
 <xc><<EOF>>     { yyerror("unterminated /* comment"); }
 
-{integer}       { return process_integer_literal(yytext, yylval); }
-{decimal}       { yylval->str = yytext; return FCONST; }
+{integer}       { yylval->str = pstrdup(MM, yytext); return ICONST;}
+{decimal}       { yylval->str = pstrdup(MM, yytext); return FCONST; }
 
 
 %%
@@ -73,27 +73,4 @@ identifier      {ident_start}{ident_cont}*
 void yyerror(const char* s)
 {
  fprintf(stdout, "scan.l error:%s.\n", s);
-}
-
-static int
-process_integer_literal(const char *token, YYSTYPE *lval)
-{
-  long  val;
-  char  *endptr;
-
-  errno = 0;
-  val = strtol(token, &endptr, 10);
-  if (*endptr != '\0' || errno == ERANGE
-#ifdef HAVE_LONG_INT_64
-    /* if long > 32 bits, check for overflow of int4 */
-    || val != (long) ((int32) val)
-#endif
-    )
-  {
-    /* integer too large, treat it as a float */
-    lval->str = (char*)token;
-    return FCONST;
-  }
-  lval->ival = val;
-  return ICONST;
 }
