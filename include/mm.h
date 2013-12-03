@@ -26,11 +26,14 @@ typedef struct memory_manager{
 extern "C" {
 #endif
 
+void* my_malloc(size_t size);
+void my_free(void* p);
+
 memory_manager* mm_create(size_t blk_size);
 void* mm_alloc(memory_manager* mm, size_t size);
 void mm_destroy(memory_manager* mm);
 
-char* pstrdup(memory_manager* mm, char* s);
+char* pstrdup(char* s);
 
 #ifdef __cplusplus
 }

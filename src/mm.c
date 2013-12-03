@@ -111,12 +111,11 @@ void mm_destroy(memory_manager* mm)
   free(mm);
 }
 
-char* pstrdup(memory_manager* mm, char* s)
+char* pstrdup(char* s)
 {
   size_t len = strlen(s);
-  char* ret = (char*)mm_alloc(mm, len + 1);
+  char* ret = (char*)my_malloc(len + 1);
   memcpy(ret, s, len);
   ret[len] = '\0';
   return ret;
 }
-

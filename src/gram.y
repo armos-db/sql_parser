@@ -37,13 +37,11 @@ Iconst: ICONST { $$ = $1; };
 
 int parse_sql(const char* sql, size_t len, statement* stmt)
 {
-  memory_manager* mm = mm_create(MM_DEF_BLK_SIZE);
-  struct pc_data p = {NULL, mm, stmt};
+  struct pc_data p = {NULL, stmt};
   int ret;
 
   /* set up scanner */
   if (yylex_init_extra(&p, &p.scaninfo)) {
-    mm_destroy(mm);
     return 1;
   }
 
@@ -53,7 +51,6 @@ int parse_sql(const char* sql, size_t len, statement* stmt)
   ret = yyparse(&p);
   yy_delete_buffer(buffer_state, p.scaninfo);
 
-  mm_destroy(mm);
   return ret;
 }
 

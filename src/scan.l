@@ -7,7 +7,6 @@
 #include "parser.h"
 
 
-#define MM pp->mm
 void yyerror(const char*);
 
 
@@ -64,8 +63,8 @@ identifier      {ident_start}{ident_cont}*
 <xc>{xcinside}  { /* ignore */ }
 <xc><<EOF>>     { yyerror("unterminated /* comment"); }
 
-{integer}       { yylval->str = pstrdup(MM, yytext); return ICONST;}
-{decimal}       { yylval->str = pstrdup(MM, yytext); return FCONST; }
+{integer}       { yylval->str = pstrdup(yytext); return ICONST;}
+{decimal}       { yylval->str = pstrdup(yytext); return FCONST; }
 
 
 %%

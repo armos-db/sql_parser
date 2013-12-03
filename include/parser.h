@@ -11,7 +11,6 @@
 struct pc_data
 {
   yyscan_t    scaninfo;
-  memory_manager *mm;
   statement   *stmt;
 };
 
